@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Salsa&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Salsa", cursive;
+}
+/* body{
+    background: url("./images/Background.png") no-repeat ;
+    background-size:cover;
+} */
+.navbar_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: transparent;
+}
+.navbar_container img {
+  height: 4em;
+  padding-left: 1.5em;
+}
+.nav_menu {
+  display: flex;
+}
+.nav_menu li {
+  margin: 20px;
+  list-style: none;
+  background-color: #1874ff;
+  padding: 9px;
+  border-radius: 8px;
+  font-size: small;
+}
+.nav_menu li:hover {
+  background-color: #0b264f;
+}
+
+.nav_menu li a {
+  text-decoration: none;
+  color: white;
+  position: relative;
+}
