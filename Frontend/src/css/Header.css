@@ -6,10 +6,9 @@
   box-sizing: border-box;
   font-family: "Salsa", cursive;
 }
-/* body{
-    background: url("./images/Background.png") no-repeat ;
-    background-size:cover;
-} */
+body{
+  background-color: #CED4DA;
+}
 .navbar_container {
   display: flex;
   align-items: center;

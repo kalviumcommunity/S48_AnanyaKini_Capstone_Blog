@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../images/Logo.png";
+import '../css/Header.css'
 const Header = () => {
   return (
     <div>
@@ -13,7 +14,7 @@ const Header = () => {
             <li><Link to="/profile">Earnest Achiever</Link></li>
             <li><Link to="/create">Create Post</Link></li>
             <li><Link to="/authors">Authors</Link></li>
-            <li><Link to="/Logout">Logout </Link></li>
+            <li><Link to="/logout">Logout </Link></li>
           </ul>
           
         </div>
