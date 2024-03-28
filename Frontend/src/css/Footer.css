@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Salsa&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #ced4da;
+}
+
+footer {
+  background-color: #ffffff;
+  color: #080062;
+  padding: 1.5em;
+  height: 100px;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.footer_categories {
+  display: flex;
+  list-style: none;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.5em;
+}
+
+.footer_categories li a {
+  text-decoration: none;
+  color: #080062;
+  position: relative;
+}
+
+.footer_categories li a:hover::before,
+.footer_categories li a:hover::after {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 2px;
+  bottom: -2px;
+  background-color: #080062;
+  transition: width 0.3s ease-in-out;
+}
+
+.footer_categories li a:hover::before {
+  left: 0;
+}
+
+.footer_categories li a:hover::after {
+  right: 0;
+}
+
+.footer_copyright {
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid #080062;
+  padding: 0.4em;
+}
