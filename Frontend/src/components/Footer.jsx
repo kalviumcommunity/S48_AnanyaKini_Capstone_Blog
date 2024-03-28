@@ -1,18 +1,27 @@
-import React from 'react'
-import '../css/Footer.css'
-import {Link} from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
+import "../css/Footer.css";
+
 const Footer = () => {
+  const categories = [
+    "Africa",
+    "Antartica",
+    "Asia",
+    "Australia",
+    "Europe",
+    "NorthAmerica",
+    "SouthAmerica",
+  ];
+
   return (
     <div>
       <footer>
         <ul className="footer_categories">
-          <li><Link to='/posts/categories/:Africa'>Africa</Link></li>
-          <li><Link to='/posts/categories/:Antartica'>Antartica</Link></li>
-          <li><Link to='/posts/categories/:Asia'>Asia</Link></li>
-          <li><Link to='/posts/categories/:Australia'>Australia</Link></li>
-          <li><Link to='/posts/categories/:Europe'>Europe</Link></li>
-          <li><Link to='/posts/categories/:NorthAmerica'>North America</Link></li>
-          <li><Link to='/posts/categories/:SouthAmerica'>South America</Link></li>
+          {categories.map((category) => (
+            <li key={category}>
+              <Link to={`/posts/categories/:${category}`}>{category}</Link>
+            </li>
+          ))}
         </ul>
 
         <div className="footer_copyright">
@@ -20,7 +29,7 @@ const Footer = () => {
         </div>
       </footer>
     </div>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
