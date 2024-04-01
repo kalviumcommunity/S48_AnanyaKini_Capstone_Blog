@@ -1,0 +1,60 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.register,.login{
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+
+}
+.register-container,.login-container {
+  background-color: #fff;
+  padding: 3rem;
+  border-radius: 20px;
+  width: 70%;
+}
+.register-container h2 , .login-container h2{
+  color: #080062;
+}
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  background-color: #ced4da;
+  border: none;
+}
+input::placeholder,
+small {
+  color: #908cbc;
+}
+small a {
+  color: #1874ff;
+}
+.btn-register,.btn-login {
+  background-color: #1874ff;
+  padding: 9px;
+  border-radius: 8px;
+  width:  20%;
+  border: none;
+  color: white;
+  margin: 0.5em 0;
+}
+.btn-register:hover {
+  background-color: #0b264f;
+}
+.btn-login:hover {
+  background-color: #0b264f;
+}
+.form_error-message{
+  background-color: rgb(252, 84, 84);
+  margin: 0.7em 0;
+  padding: 0.2em;
+  color: #fff;
+  border-radius: 2px;
+  text-align: center;
+}
