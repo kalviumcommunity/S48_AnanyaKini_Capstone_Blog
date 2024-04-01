@@ -1,6 +1,7 @@
 body {
   overflow-x: hidden;
 }
+
 .pre-text {
   display: flex;
   flex-direction: column;
