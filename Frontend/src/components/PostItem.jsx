@@ -13,9 +13,9 @@ const PostItem = ({
 }) => {
   const titleWords = title.split(" ");
   const shortenedTitle =
-    titleWords.length > 5 ? titleWords.slice(0, 5).join(" ") + "..." : title;
+    titleWords.length > 5 ? titleWords.slice(0, 4).join(" ") + "..." : title;
   const descriptionWords = description.split(" ");
-  const shortenedDescription = descriptionWords.slice(0, 20).join(" ");
+  const shortenedDescription = descriptionWords.slice(0, 19).join(" ");
 
   return (
     <div>
