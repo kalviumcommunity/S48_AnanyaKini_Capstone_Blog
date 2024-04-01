@@ -4,7 +4,7 @@ import PostItem from "../PostItem";
 import "../../css/AuthorPost.css";
 import Header from "../Header";
 import Footer from "../Footer";
-import '../../css/CategoryPosts.css'
+import "../../css/AuthorPost.css";
 const CategoryPosts = () => {
   const [post] = useState(blogs_posts);
 
