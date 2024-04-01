@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {  Route, Routes } from "react-router-dom";
 import ErrorPage from "./components/pages/ErrorPage";
 import Home from "./components/pages/Home";
 import PostDetail from "./components/pages/PostDetail";
