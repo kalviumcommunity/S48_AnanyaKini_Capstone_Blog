@@ -4,7 +4,7 @@ import "../css/Posts.css";
 import { blogs_posts } from "../Data";
 
 const Posts = () => {
-  const [posts, setPosts] = useState(blogs_posts);
+  const [posts] = useState(blogs_posts);
 
   return (
     <>
