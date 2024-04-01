@@ -35,7 +35,7 @@ const Login = () => {
               onChange={changeInputHandle}
             />
             <input
-              type="text"
+              type="password"
               placeholder="Password"
               name="password"
               value={userData.password}

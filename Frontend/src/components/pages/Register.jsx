@@ -43,14 +43,14 @@ const Register = () => {
               onChange={changeInputHandle}
             />
             <input
-              type="text"
+              type="password"
               placeholder="Password"
               name="password"
               value={userData.password}
               onChange={changeInputHandle}
             />
             <input
-              type="text"
+              type="password"
               placeholder="Confirm Password"
               name="password2"
               value={userData.password2}
