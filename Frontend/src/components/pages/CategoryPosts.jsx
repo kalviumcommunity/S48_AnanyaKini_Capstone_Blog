@@ -6,7 +6,7 @@ import Header from "../Header";
 import Footer from "../Footer";
 import '../../css/CategoryPosts.css'
 const CategoryPosts = () => {
-  const [post, setPosts] = useState(blogs_posts);
+  const [post] = useState(blogs_posts);
 
   return (
     <>

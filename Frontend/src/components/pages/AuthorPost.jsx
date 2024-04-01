@@ -6,7 +6,7 @@ import Header from "../Header";
 import Footer from "../Footer";
 
 const AuthorPost = () => {
-  const [post, setPosts] = useState(blogs_posts);
+  const [post] = useState(blogs_posts);
 
   return (
     <>
