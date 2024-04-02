@@ -1,4 +1,7 @@
-
+.navbar{
+  width: 100%;
+  background-color: #fff;
+}
 
 .post_detail {
   margin: 2rem auto;

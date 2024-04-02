@@ -61,3 +61,7 @@ small a {
   border-radius: 2px;
   text-align: center;
 }
+.navbar{
+  width: 100%;
+  background-color: #fff;
+}

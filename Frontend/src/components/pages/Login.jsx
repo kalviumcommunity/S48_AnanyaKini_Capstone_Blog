@@ -20,7 +20,9 @@ const Login = () => {
 
   return (
     <div>
+      <div className="navbar">
       <Header />
+      </div>
       <section className="login">
         <div className="login-container">
           <h2>Sign In</h2>
