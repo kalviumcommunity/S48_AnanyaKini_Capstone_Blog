@@ -21,7 +21,7 @@ const App = () => {
       <Route path="/posts/:id" element={<PostDetail />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/users/:id" element={<UserProfile />} />
+      <Route path="/profile/:id" element={<UserProfile />} />
       <Route path="/authors" element={<Authors />} />
       <Route path="/create" element={<CreatePost />} />
       <Route path="/posts/categories/:category" element={<CategoryPosts />} />

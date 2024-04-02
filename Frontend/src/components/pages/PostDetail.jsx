@@ -9,7 +9,9 @@ import Turkey from "../../images/Turkey.jpg";
 const PostDetail = () => {
   return (
     <>
+      <div className="navbar">
       <Header />
+      </div>
       <section className="post_detail">
         <div className="post-detail_container">
           <div className="post-detail_header">

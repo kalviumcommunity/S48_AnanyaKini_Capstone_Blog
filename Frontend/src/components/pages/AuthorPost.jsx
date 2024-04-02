@@ -10,7 +10,9 @@ const AuthorPost = () => {
 
   return (
     <>
+    <div className="navbar">
       <Header />
+      </div>
       <section className="author_posts">
         {post.length > 0 ? (
           <div className="author_posts-container">

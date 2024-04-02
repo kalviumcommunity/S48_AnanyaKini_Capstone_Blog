@@ -22,7 +22,9 @@ const Register = () => {
 
   return (
     <div>
+      <div className="navbar">
       <Header />
+      </div>
       <section className="register">
         <div className="register-container">
           <h2>Sign Up</h2>

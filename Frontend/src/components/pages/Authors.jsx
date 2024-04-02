@@ -30,7 +30,9 @@ const Authors = () => {
 
   return (
     <div>
+      <div className="navbar">
       <Header />
+      </div>
       <section className="authors">
         {authors.length > 0 ? (
           <div className="authors_container">
