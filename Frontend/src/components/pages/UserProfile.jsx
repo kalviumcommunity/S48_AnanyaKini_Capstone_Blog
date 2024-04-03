@@ -48,11 +48,39 @@ const UserProfile = () => {
             <h1>Ernest Achiever</h1>
             <form action="" className="profile_form">
               <p className="error-message">This is an error message</p>
-              <input type="text" placeholder="Full Name" value={name} onChange={e => setName(e.target.value)}/>
-              <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)}/>
-              <input type="password" placeholder="Current Password" value={currentPassword} onChange={e => setCurrentPassword(e.target.value)}/>
-              <input type="password" placeholder="Confirm new Password" value={confirmnewPassword} onChange={e => setConfirmNewPassword(e.target.value)}/>
-              <button type="submit" className="btn-submit">Update Details</button>
+              <input
+                type="text"
+                placeholder="Full Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="Current Password"
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="New Password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder="Confirm new Password"
+                value={confirmnewPassword}
+                onChange={(e) => setConfirmNewPassword(e.target.value)}
+              />
+              <button type="submit" className="btn-submit">
+                Update Details
+              </button>
             </form>
           </div>
         </div>
