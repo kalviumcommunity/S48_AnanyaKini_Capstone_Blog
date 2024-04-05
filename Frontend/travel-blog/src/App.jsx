@@ -1,5 +1,5 @@
 import React from "react";
-import {  Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import ErrorPage from "./components/pages/ErrorPage";
 import Home from "./components/pages/Home";
 import PostDetail from "./components/pages/PostDetail";
@@ -13,7 +13,7 @@ import CategoryPosts from "./components/pages/CategoryPosts";
 import Dashboard from "./components/pages/Dashboard";
 import AuthorPost from "./components/pages/AuthorPost";
 import Logout from "./components/pages/Logout";
-import DeletePost from './components/pages/DeletePost'
+import DeletePost from "./components/pages/DeletePost";
 
 const App = () => {
   return (

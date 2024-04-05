@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "../../css/EditPost.css";
-import Header from "../Header";
-import Footer from "../Footer";
+import "../../css/CreatePost.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import Header from "../Header";
+import Footer from "../Footer";
 
 const EditPost = () => {
   const [title, setTitle] = useState("");
@@ -11,34 +11,9 @@ const EditPost = () => {
   const [description, setDescription] = useState("");
   const [thumbnail, setThumbnail] = useState("");
 
-  const modules = {
-    toolbar: [
-      [{ header: [1, 2, 3, 4, 5, 6, false] }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [
-        { list: "ordered" },
-        { list: "bullet" },
-        { indent: "-1" },
-        { indent: "+1" },
-      ],
-      ["link", "image"],
-      ["clean"],
-    ],
+  const handleDescriptionChange = (value) => {
+    setDescription(value);
   };
-
-  const formats = [
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "indent",
-    "link",
-    "image",
-  ];
 
   const Post_categories = [
     "Asia",
@@ -50,17 +25,16 @@ const EditPost = () => {
     "Australia",
     "Uncategorized",
   ];
-
   return (
     <div>
       <div className="navbar">
         <Header />
       </div>
-      <section className="edit-post">
-        <div className="edit-post-container">
-          <h2>Edit Post</h2>
+      <section className="create-post">
+        <div className="create-post-container">
+          <h2>Create Post</h2>
           <p className="error-message">This is an error message</p>
-          <form className="form-edit-post">
+          <form className="form-create-post">
             <input
               type="text"
               placeholder="  Title"
@@ -81,10 +55,17 @@ const EditPost = () => {
               ))}
             </select>
             <ReactQuill
-              modules={modules}
-              formats={formats}
               value={description}
-              onChange={setDescription}
+              onChange={handleDescriptionChange}
+              modules={{
+                toolbar: [
+                  [{ header: [1, 2, 3, 4, 5, 6, false] }],
+                  ["bold", "italic", "underline", "strike"],
+                  [{ list: "ordered" }, { list: "bullet" }],
+                  ["link", "image"],
+                  ["clean"],
+                ],
+              }}
             />
             <input
               type="file"
@@ -92,7 +73,7 @@ const EditPost = () => {
               accept="png,jpg,jpeg"
             />
             <button type="submit" className="submit">
-              Update
+              Create
             </button>
           </form>
         </div>

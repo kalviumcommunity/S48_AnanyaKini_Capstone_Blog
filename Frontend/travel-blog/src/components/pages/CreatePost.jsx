@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import "../../css/CreatePost.css";
-import { Link } from "react-router-dom";
-import Header from "../Header";
-import Footer from "../Footer";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import Header from "../Header";
+import Footer from "../Footer";
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
@@ -12,34 +11,9 @@ const CreatePost = () => {
   const [description, setDescription] = useState("");
   const [thumbnail, setThumbnail] = useState("");
 
-  const modules = {
-    toolbar: [
-      [{ header: [1, 2, 3, 4, 5, 6, false] }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [
-        { list: "ordered" },
-        { list: "bullet" },
-        { indent: "-1" },
-        { indent: "+1" },
-      ],
-      ["link", "image"],
-      ["clean"],
-    ],
+  const handleDescriptionChange = (value) => {
+    setDescription(value);
   };
-
-  const formats = [
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "indent",
-    "link",
-    "image",
-  ];
 
   const Post_categories = [
     "Asia",
@@ -51,7 +25,6 @@ const CreatePost = () => {
     "Australia",
     "Uncategorized",
   ];
-
   return (
     <div>
       <div className="navbar">
@@ -82,10 +55,17 @@ const CreatePost = () => {
               ))}
             </select>
             <ReactQuill
-              modules={modules}
-              formats={formats}
               value={description}
-              onChange={setDescription}
+              onChange={handleDescriptionChange}
+              modules={{
+                toolbar: [
+                  [{ header: [1, 2, 3, 4, 5, 6, false] }],
+                  ["bold", "italic", "underline", "strike"],
+                  [{ list: "ordered" }, { list: "bullet" }],
+                  ["link", "image"],
+                  ["clean"],
+                ],
+              }}
             />
             <input
               type="file"

@@ -15,7 +15,7 @@
   height: 90vh;
   align-items: center;
   justify-content: center;
-  margin: 4rem;
+  margin: 1rem;
 }
 .create-post-container {
   background-color: #fff;
@@ -45,14 +45,30 @@
   color: white;
   cursor: pointer;
 }
-.ql-toolbar {
-  background-color: #ced4da;
+.ql-container {
+  background-color: #CED4DA;
+  min-height: 100px;
 }
+
+.ql-toolbar {
+  background-color: #CED4DA;
+}
+
+.ql-picker,
+.ql-picker-item,
+.ql-picker-label,
+.ql-picker-label::before,
+.ql-picker-item::before,
+.ql-picker-item::after,
+.ql-picker-item.ql-selected,
+.ql-picker-item.ql-selected::before,
+.ql-picker-item.ql-selected::after,
 .ql-editor {
-  overflow: scroll;
-  background-color: white;
-  min-height: 9rem;
-  border: 1.5px solid #908cbc;
+  color: #908CBC;
+}
+
+.ql-editor a {
+  color: #908CBC;
 }
 input[type="file"] {
   background-color: #fff;
