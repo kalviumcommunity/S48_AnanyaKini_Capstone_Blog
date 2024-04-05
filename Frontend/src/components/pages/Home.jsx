@@ -48,7 +48,7 @@ const Home = () => {
 
   return (
     <div>
-      <Header isScrolled={isScrolled} />
+      <div className="navbarhome"><Header /></div>
       <div className="container_home">
         <div className="image-carousel-container">
           <div className="image-carousel">

@@ -1,0 +1,63 @@
+.navbar {
+  width: 100%;
+  background-color: #fff;
+}
+.error-message {
+  background-color: rgb(252, 84, 84);
+  margin: 0.7em 0;
+  padding: 0.2em;
+  color: #fff;
+  border-radius: 2px;
+  text-align: left;
+}
+.create-post {
+  display: flex;
+  height: 90vh;
+  align-items: center;
+  justify-content: center;
+  margin: 4rem;
+}
+.create-post-container {
+  background-color: #fff;
+  padding: 3rem;
+  border-radius: 20px;
+  width: 70%;
+}
+.create-post-container h2 {
+  color: #080062;
+}
+.form-create-post input {
+  color: #080062;
+}
+.form-create-post input::placeholder {
+  color: #908cbc;
+}
+.form-create-post select {
+  margin: 1em 0;
+  color: #908cbc;
+}
+.submit {
+  background-color: #1874ff;
+  padding: 9px;
+  border-radius: 8px;
+  width: 20%;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+.ql-toolbar {
+  background-color: #ced4da;
+}
+.ql-editor {
+  overflow: scroll;
+  background-color: white;
+  min-height: 9rem;
+  border: 1.5px solid #908cbc;
+}
+input[type="file"] {
+  background-color: #fff;
+  padding: 0;
+  color: #908cbc;
+  cursor: pointer;
+  margin: 1rem 0;
+}
