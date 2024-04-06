@@ -2,21 +2,24 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
+const userRoutes = require("./routes/userRoutes");
+const postRoutes = require("./routes/postRoutes");
 
 // Middleware
 const app = express();
-app.use(cors());
+
+app.use(cors({ credentials: true, origin: "http://localhost:5173/" }));
 app.use(express.json());
+app.use("/api/users", userRoutes);
+app.use("/api/posts", postRoutes);
 
-// Example route
 app.get("/", (req, res) => res.send("Hello, World!"));
+app.get("/dbstatus", (req, res) =>
+  res.json({
+    status: mongoose.connection.readyState === 1 ? "Connected" : "Disconnected",
+  })
+);
 
-// Endpoint to check MongoDB connection status
-app.get("/dbstatus", (req, res) => {
-  const isConnected = mongoose.connection.readyState === 1;
-  res.json({ status: isConnected ? "Connected" : "Disconnected" });
-});
-// Connect to MongoDB
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() =>
