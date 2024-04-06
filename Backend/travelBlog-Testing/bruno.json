@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "travelBlog-Testing",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
