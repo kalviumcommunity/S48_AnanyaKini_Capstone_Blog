@@ -1,4 +1,3 @@
-markdown
 # Globe Trotters
 
 Globe Trotters is a comprehensive travel blogging platform that aims to provide a dedicated space for travel enthusiasts to share their adventures, connect with fellow travelers, and explore diverse cultures through firsthand narratives.
