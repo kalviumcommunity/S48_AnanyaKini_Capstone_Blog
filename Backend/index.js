@@ -2,16 +2,21 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
+
 const userRoutes = require("./routes/userRoutes");
 const postRoutes = require("./routes/postRoutes");
+const {notFound,errorHandler} = require("./middleware/errorMiddleware")
 
-// Middleware
 const app = express();
-
 app.use(cors({ credentials: true, origin: "http://localhost:5173/" }));
 app.use(express.json());
+
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
+
+app.use(notFound)
+app.use(errorHandler)
+
 
 app.get("/", (req, res) => res.send("Hello, World!"));
 app.get("/dbstatus", (req, res) =>
