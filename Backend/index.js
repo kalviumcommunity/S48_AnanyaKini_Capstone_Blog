@@ -8,6 +8,13 @@ const userRoutes = require("./routes/userRoutes");
 const postRoutes = require("./routes/postRoutes");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() =>
+    console.log("Successfully connected to MongoDB")
+  )
+  .catch((error) => console.error("Error connecting to MongoDB:", error));
+
 const app = express();
 app.use(express.json());
 app.use(cors({ credentials: true, origin: "http://localhost:5173/" }));
@@ -28,11 +35,6 @@ app.get("/dbstatus", (req, res) =>
   })
 );
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() =>
-    app.listen(process.env.PORT || 5000, () =>
+app.listen(process.env.PORT || 5000, () =>
       console.log(`Server is running on port ${process.env.PORT || 5000}`)
     )
-  )
-  .catch((error) => console.error("Error connecting to MongoDB:", error));
