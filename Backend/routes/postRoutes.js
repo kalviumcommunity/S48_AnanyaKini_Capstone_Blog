@@ -7,7 +7,6 @@ const {
   getUserPosts,
   editPost,
   deletePost,
-  removeEventListener,
 } = require("../controllers/postController");
 const router = Router();
 const authMiddleware = require("../middleware/authMiddleware");

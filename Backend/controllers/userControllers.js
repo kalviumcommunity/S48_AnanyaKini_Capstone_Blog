@@ -191,7 +191,7 @@ const editUser = async (req, res, next) => {
       { name, email, password: hash },
       { new: true }
     );
-        res.status(200).json(newInfo);
+    res.status(200).json(newInfo);
   } catch (error) {
     return next(
       new HttpError("An error occurred while updating user details.", 422)
