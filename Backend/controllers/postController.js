@@ -7,7 +7,6 @@ const httpError = require("../models/errorModel");
 const jsonwebtoken = require("jsonwebtoken");
 // ============================================================CREATE A POST
 // POST: api/posts
-
 const createPost = async (req, res, next) => {
   try {
     const { title, category, description } = req.body;
@@ -103,24 +102,131 @@ const getCatPost = async (req, res, next) => {
 // GET:api/posts/users/:id
 const getUserPosts = async (req, res, next) => {
   try {
-    const {id} = req.params;
-    const posts = await Post.find({ creator:id }).sort({ createdAt: -1 });
-    res.status(200).json(posts)
+    const { id } = req.params;
+    const posts = await Post.find({ creator: id }).sort({ createdAt: -1 });
+    res.status(200).json(posts);
   } catch (error) {
-    return next (new httpError(error))
+    return next(new httpError(error));
   }
 };
 
 // ============================================================EDIT POST
 // PATCH:api/posts/:id
 const editPost = async (req, res, next) => {
-  res.json("Edit post");
+  try {
+    let updatedPost;
+    const postID = req.params.id;
+    const { title, category, description } = req.body;
+
+    if (!title || !category || !description || description.length < 12) {
+      return next(new httpError("Fill in all the fields ", 422));
+    }
+
+    if (!req.files) {
+      updatedPost = await Post.findByIdAndUpdate(
+        postID,
+        { title, category, description },
+        { new: true }
+      );
+    } else {
+      const oldPost = await Post.findById(postID);
+      const filePath = path.join(__dirname, "..", "uploads", oldPost.thumbnail);
+      console.log("File path to delete:", filePath); // Debugging statement
+
+      fs.unlink(filePath, async (err) => {
+        if (err) {
+          console.error("Error occurred while unlinking file:", err); // Debugging statement
+          return next(new httpError(err));
+        }
+
+        const { thumbnail } = req.files;
+
+        if (thumbnail.size > 5000000) {
+          return next(
+            new httpError("Thumbnail is too big . Should be less than 5MB")
+          );
+        }
+
+        const fileName = thumbnail.name;
+        const splittedFilename = fileName.split(".");
+        const newFilename =
+          splittedFilename[0] +
+          uuid() +
+          "." +
+          splittedFilename[splittedFilename.length - 1];
+
+        thumbnail.mv(
+          path.join(__dirname, "..", "/uploads", newFilename),
+          async (err) => {
+            if (err) {
+              return next(new httpError(err));
+            }
+
+            updatedPost = await Post.findByIdAndUpdate(
+              postID,
+              { title, category, description, thumbnail: newFilename },
+              { new: true }
+            );
+            if (!updatedPost) {
+              return next(new httpError("Could not update post.", 400));
+            }
+            res.status(200).json(updatedPost);
+          }
+        );
+      });
+      return; // Added to avoid executing the final response outside the async operation
+    }
+
+    if (!updatedPost) {
+      return next(new httpError("Could not update post.", 400));
+    }
+    res.status(200).json(updatedPost);
+  } catch (error) {
+    return next(
+      new httpError("An error occurred while editing the post.", 422)
+    );
+  }
 };
+
 // ============================================================DELETE POST
 // DELETE:api/posts/:id
 const deletePost = async (req, res, next) => {
-  res.json("Delete post");
+  try {
+    const postID = req.params.id;
+    if (!postID) {
+      return next(new httpError("Post ID unavailable", 400));
+    }
+
+    const post = await Post.findById(postID);
+    if (!post) {
+      return next(new httpError("Post not found", 404));
+    }
+
+    const fileName = post.thumbnail;
+    // Delete thumbnail from uploads folder
+    fs.unlink(path.join(__dirname, "..", "/uploads", fileName), async (err) => {
+      if (err) {
+        return next(new httpError(err));
+      } else {
+        // Delete post from database
+        await Post.findByIdAndDelete(postID);
+        
+        // Update user's post count
+        const currentUser = await User.findById(req.user.id);
+        if (!currentUser) {
+          return next(new httpError("User not found", 404));
+        }
+        currentUser.posts -= 1; // Decrement post count
+        await currentUser.save(); // Save the updated user object
+      }
+    });
+
+    res.json(`Post ${postID} deleted successfully.`);
+  } catch (error) {
+    return next(new httpError("An error occurred while deleting the post.", 422));
+  }
 };
+
 
 module.exports = {
   createPost,
