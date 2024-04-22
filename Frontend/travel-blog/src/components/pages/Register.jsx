@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Footer from "../Footer";
 import Header from "../Header";
-import { Link } from "react-router-dom";
-import '../../css/signin.css'
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import "../../css/signin.css";
 
 const Register = () => {
   const [userData, setUserData] = useState({
@@ -12,6 +13,9 @@ const Register = () => {
     password2: "",
   });
 
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
   const changeInputHandle = (e) => {
     const { name, value } = e.target;
     setUserData((prevState) => ({
@@ -20,16 +24,34 @@ const Register = () => {
     }));
   };
 
+  const registerUser = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      const response = await axios.post(
+        `http://localhost:5000/api/users/register`,
+        userData
+      );
+      console.log(response.data);
+      navigate("/login");
+    } catch (err) {
+      console.error(err);
+      setError(
+        err.response?.data?.message || "An error occurred while registering."
+      );
+    }
+  };
+
   return (
     <div>
       <div className="navbar">
-      <Header />
+        <Header />
       </div>
       <section className="register">
         <div className="register-container">
           <h2>Sign Up</h2>
-          <form className="form register_form">
-            <p className="form_error-message">This is an error message</p>
+          <form className="form register_form" onSubmit={registerUser}>
+            {error && <p className="form_error-message">{error}</p>}
             <input
               type="text"
               placeholder="Full Name"
@@ -62,7 +84,9 @@ const Register = () => {
               Register
             </button>
           </form>
-          <small>Already have an account ? <Link to='/login'>Sign In</Link></small>
+          <small>
+            Already have an account ? <Link to="/login">Sign In</Link>
+          </small>
         </div>
       </section>
       <Footer />
