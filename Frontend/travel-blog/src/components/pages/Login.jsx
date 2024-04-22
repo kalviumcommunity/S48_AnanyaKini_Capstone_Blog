@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Footer from "../Footer";
 import Header from "../Header";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "../../css/signin.css";
 
 const Login = () => {
@@ -9,6 +10,9 @@ const Login = () => {
     email: "",
     password: "",
   });
+
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const changeInputHandle = (e) => {
     const { name, value } = e.target;
@@ -18,16 +22,32 @@ const Login = () => {
     }));
   };
 
+  const loginUser = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      const response = await axios.post(
+        `http://localhost:5000/api/users/login`,
+        userData
+      );
+      const user = await response.data;
+      alert("Hi " + user.name + ", welcome to GlobeTrotters!");
+      navigate("/");
+    } catch (err) {
+      setError(err.response.data.message);
+    }
+  };
+
   return (
     <div>
       <div className="navbar">
-      <Header />
+        <Header />
       </div>
       <section className="login">
         <div className="login-container">
           <h2>Sign In</h2>
-          <form className="form login_form">
-            <p className="form_error-message">This is an error message</p>
+          <form className="form login_form" onSubmit={loginUser}>
+            {error && <p className="form_error-message">{error}</p>}
 
             <input
               type="text"
@@ -49,7 +69,7 @@ const Login = () => {
             </button>
           </form>
           <small>
-            Dont have an account ? <Link to="/register">Register</Link>
+            Don't have an account? <Link to="/register">Register</Link>
           </small>
         </div>
       </section>

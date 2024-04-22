@@ -15,11 +15,12 @@
   background-color: #fff;
   padding: 3rem;
   border-radius: 20px;
-  width: 70%;
+  width: 40%;
 }
 .register-container h2,
 .login-container h2 {
   color: #080062;
+  padding: 0.5em 0;
 }
 input,
 select,

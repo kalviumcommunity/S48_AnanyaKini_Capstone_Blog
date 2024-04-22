@@ -131,11 +131,11 @@ const editPost = async (req, res, next) => {
     } else {
       const oldPost = await Post.findById(postID);
       const filePath = path.join(__dirname, "..", "uploads", oldPost.thumbnail);
-      console.log("File path to delete:", filePath); // Debugging statement
+      console.log("File path to delete:", filePath); 
 
       fs.unlink(filePath, async (err) => {
         if (err) {
-          console.error("Error occurred while unlinking file:", err); // Debugging statement
+          console.error("Error occurred while unlinking file:", err); 
           return next(new httpError(err));
         }
 
@@ -210,23 +210,24 @@ const deletePost = async (req, res, next) => {
       } else {
         // Delete post from database
         await Post.findByIdAndDelete(postID);
-        
+
         // Update user's post count
         const currentUser = await User.findById(req.user.id);
         if (!currentUser) {
           return next(new httpError("User not found", 404));
         }
-        currentUser.posts -= 1; // Decrement post count
-        await currentUser.save(); // Save the updated user object
+        currentUser.posts -= 1; 
+        await currentUser.save(); 
       }
     });
 
     res.json(`Post ${postID} deleted successfully.`);
   } catch (error) {
-    return next(new httpError("An error occurred while deleting the post.", 422));
+    return next(
+      new httpError("An error occurred while deleting the post.", 422)
+    );
   }
 };
-
 
 module.exports = {
   createPost,
