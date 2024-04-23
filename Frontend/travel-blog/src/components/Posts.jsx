@@ -1,10 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import PostItem from "./PostItem";
 import "../css/Posts.css";
-import { blogs_posts } from "../Data";
 
 const Posts = () => {
-  const [posts] = useState(blogs_posts);
+  const [posts, setPosts] = useState([]);
+  console.log(posts);
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/posts`);
+        setPosts(response?.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchPosts();
+  }, []);
 
   return (
     <>
@@ -16,15 +28,16 @@ const Posts = () => {
           </div>
           <section className="posts">
             <div className="post_container">
-              {posts.map(({ id, thumbnail, category, title, description, authorId }) => (
+              {posts.map((item) => (
                 <PostItem
-                  key={id}
-                  postID={id}
-                  thumbnail={thumbnail}
-                  category={category}
-                  title={title}
-                  description={description}
-                  authorID={authorId}
+                  key={item._id}
+                  postID={item._id}
+                  thumbnail={item.thumbnail}
+                  category={item.category}
+                  title={item.title}
+                  description={item.description}
+                  authorId={item.creator}
+                  createdAt={item.createdAt}
                 />
               ))}
             </div>

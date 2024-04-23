@@ -2,6 +2,20 @@
   width: 100%;
   background-color: #fff;
 }
+.createPost-bg {
+  background-image: url("../images/Khazaksthan.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  display: flex;
+}
+.create-post {
+  display: flex;
+  height: 90vh;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem;
+}
 .error-message {
   background-color: rgb(252, 84, 84);
   margin: 0.7em 0;
@@ -10,18 +24,12 @@
   border-radius: 2px;
   text-align: left;
 }
-.create-post {
-  display: flex;
-  height: 90vh;
-  align-items: center;
-  justify-content: center;
-  margin: 1rem;
-}
+
 .create-post-container {
   background-color: #fff;
   padding: 3rem;
   border-radius: 20px;
-  width: 70%;
+  width: 60%;
 }
 .create-post-container h2 {
   color: #080062;
@@ -46,12 +54,12 @@
   cursor: pointer;
 }
 .ql-container {
-  background-color: #CED4DA;
+  background-color: #ced4da;
   min-height: 100px;
 }
 
 .ql-toolbar {
-  background-color: #CED4DA;
+  background-color: #ced4da;
 }
 
 .ql-picker,
@@ -64,11 +72,11 @@
 .ql-picker-item.ql-selected::before,
 .ql-picker-item.ql-selected::after,
 .ql-editor {
-  color: #908CBC;
+  color: #908cbc;
 }
 
 .ql-editor a {
-  color: #908CBC;
+  color: #908cbc;
 }
 input[type="file"] {
   background-color: #fff;

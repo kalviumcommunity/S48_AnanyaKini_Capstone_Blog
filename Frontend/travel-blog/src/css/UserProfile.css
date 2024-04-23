@@ -8,15 +8,21 @@
   justify-content: center;
   width: 100%;
 }
+.profile-bg {
+  background-image: url("../images/bg-6.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  display: flex;
+}
 .profile_container {
   display: grid;
   place-items: center;
   text-align: center;
   background-color: #fff;
-  padding: 3rem;
-  margin: 2rem;
+  padding: 1.5rem;
+  margin: 3rem;
   border-radius: 20px;
-  width: 60%;
+  width: 50%;
   box-shadow: 8px 8px 10px rgba(0, 0, 0.25, 0.25);
 }
 .profile_details {
@@ -63,7 +69,7 @@
   background-color: #080062;
 }
 .profile_details h1 {
-  margin-top: 1.5rem;
+  margin-top: 0.8rem;
 }
 .btn {
   color: #080062;
@@ -76,7 +82,7 @@
   background-color: #bababa;
 }
 .profile_form input {
-  margin: 1em 0;
+  margin: 0.5em 0;
   border-radius: 8px;
   color: #080062;
 }

@@ -33,6 +33,7 @@ const Register = () => {
         userData
       );
       console.log(response.data);
+      alert(" You have been successfully registered");
       navigate("/login");
     } catch (err) {
       console.error(err);
@@ -47,48 +48,50 @@ const Register = () => {
       <div className="navbar">
         <Header />
       </div>
-      <section className="register">
-        <div className="register-container">
-          <h2>Sign Up</h2>
-          <form className="form register_form" onSubmit={registerUser}>
-            {error && <p className="form_error-message">{error}</p>}
-            <input
-              type="text"
-              placeholder="Full Name"
-              name="name"
-              value={userData.name}
-              onChange={changeInputHandle}
-            />
-            <input
-              type="text"
-              placeholder="Email"
-              name="email"
-              value={userData.email}
-              onChange={changeInputHandle}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              value={userData.password}
-              onChange={changeInputHandle}
-            />
-            <input
-              type="password"
-              placeholder="Confirm Password"
-              name="password2"
-              value={userData.password2}
-              onChange={changeInputHandle}
-            />
-            <button type="submit" className="btn-register">
-              Register
-            </button>
-          </form>
-          <small>
-            Already have an account ? <Link to="/login">Sign In</Link>
-          </small>
-        </div>
-      </section>
+      <div className="change-bg">
+        <section className="register">
+          <div className="register-container">
+            <h2>Sign Up</h2>
+            <form className="form register_form" onSubmit={registerUser}>
+              {error && <p className="form_error-message">{error}</p>}
+              <input
+                type="text"
+                placeholder="Full Name"
+                name="name"
+                value={userData.name}
+                onChange={changeInputHandle}
+              />
+              <input
+                type="text"
+                placeholder="Email"
+                name="email"
+                value={userData.email}
+                onChange={changeInputHandle}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                value={userData.password}
+                onChange={changeInputHandle}
+              />
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                name="password2"
+                value={userData.password2}
+                onChange={changeInputHandle}
+              />
+              <button type="submit" className="btn-register">
+                Register
+              </button>
+            </form>
+            <small>
+              Already have an account ? <Link to="/login">Sign In</Link>
+            </small>
+          </div>
+        </section>
+      </div>
       <Footer />
     </div>
   );

@@ -31,13 +31,14 @@ const Authors = () => {
   return (
     <div>
       <div className="navbar">
-      <Header />
+        <Header />
       </div>
-      <section className="authors">
-        {authors.length > 0 ? (
-          <div className="authors_container">
-            {authors.map(({ id, avatar, name, posts }) => (
-              <Link key={id} to={`/posts/users/${id}`} className="author">
+      <div className="background">
+        <section className="authors">
+          {authors.length > 0 ? (
+            <div className="authors_container">
+              {authors.map(({ id, avatar, name, posts }) => (
+                <Link key={id} to={`/posts/users/${id}`} className="author">
                   <div className="author_avatar">
                     <img src={avatar} alt={`Image of ${name}`} />
                   </div>
@@ -45,13 +46,14 @@ const Authors = () => {
                     <h3>{name}</h3>
                     <p>{`${posts} posts`}</p>
                   </div>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <h2 className="center">No authors found</h2>
-        )}
-      </section>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <h2 className="center">No authors found</h2>
+          )}
+        </section>
+      </div>
       <Footer />
     </div>
   );

@@ -1,9 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Footer from "../Footer";
 import Header from "../Header";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../css/signin.css";
+import { UserContext } from "../../context/userContext";
 
 const Login = () => {
   const [userData, setUserData] = useState({
@@ -13,6 +14,8 @@ const Login = () => {
 
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  const { setCurrentUser } = useContext(UserContext);
 
   const changeInputHandle = (e) => {
     const { name, value } = e.target;
@@ -31,6 +34,7 @@ const Login = () => {
         userData
       );
       const user = await response.data;
+      setCurrentUser(user);
       alert("Hi " + user.name + ", welcome to GlobeTrotters!");
       navigate("/");
     } catch (err) {
@@ -43,36 +47,38 @@ const Login = () => {
       <div className="navbar">
         <Header />
       </div>
-      <section className="login">
-        <div className="login-container">
-          <h2>Sign In</h2>
-          <form className="form login_form" onSubmit={loginUser}>
-            {error && <p className="form_error-message">{error}</p>}
+      <div className="change-bg">
+        <section className="login">
+          <div className="login-container">
+            <h2>Sign In</h2>
+            <form className="form login_form" onSubmit={loginUser}>
+              {error && <p className="form_error-message">{error}</p>}
 
-            <input
-              type="text"
-              placeholder="Email"
-              name="email"
-              value={userData.email}
-              onChange={changeInputHandle}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              value={userData.password}
-              onChange={changeInputHandle}
-            />
+              <input
+                type="text"
+                placeholder="Email"
+                name="email"
+                value={userData.email}
+                onChange={changeInputHandle}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                value={userData.password}
+                onChange={changeInputHandle}
+              />
 
-            <button type="submit" className="btn-login">
-              Sign In
-            </button>
-          </form>
-          <small>
-            Don't have an account? <Link to="/register">Register</Link>
-          </small>
-        </div>
-      </section>
+              <button type="submit" className="btn-login">
+                Sign In
+              </button>
+            </form>
+            <small>
+              Don't have an account? <Link to="/register">Register</Link>
+            </small>
+          </div>
+        </section>
+      </div>
       <Footer />
     </div>
   );

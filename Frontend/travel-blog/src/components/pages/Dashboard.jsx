@@ -1,12 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { blogs_posts } from "../../Data";
 import "../../css/Dashboard.css";
 import Header from "../Header";
 import Footer from "../Footer";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/userContext";
 
 const Dashboard = () => {
   const [posts, setPosts] = useState(blogs_posts);
+  const { currentUser } = useContext(UserContext);
+  const token = currentUser?.token;
+  const navigate = useNavigate();
+
+  //Redirect to login page if the user hasnt logged in
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    }
+  }, []);
 
   return (
     <>
