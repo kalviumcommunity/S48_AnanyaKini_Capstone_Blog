@@ -11,8 +11,10 @@
   width: 100%;
   background-color: #fff;
 }
+
 .dashboard {
-  padding: 3rem;
+  padding: 5rem;
+  width: 100%;
 }
 .btn-edit {
   background-color: #1874ff;
@@ -44,14 +46,14 @@
 .dashboard_container {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
+  gap: 1.5em;
 }
 .dashboard_post {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  background-color: #fff;
+  gap: 2rem;
+  background-color: #ffffff;
   padding: 1rem;
   border-radius: 10px;
 }

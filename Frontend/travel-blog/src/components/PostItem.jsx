@@ -10,6 +10,7 @@ const PostItem = ({
   description,
   thumbnail,
   authorId,
+  createdAt,
 }) => {
   const titleWords = title.split(" ");
   const shortenedTitle =
@@ -21,7 +22,7 @@ const PostItem = ({
     <div>
       <article className="article">
         <div className="post_thumbnail">
-          <img src={thumbnail} alt={title} />
+          <img src={`http://localhost:5000/uploads/${thumbnail}`} alt={title} />
         </div>
         <div className="post_content">
           <Link to={`/posts/${postID}`}>
@@ -29,7 +30,7 @@ const PostItem = ({
           </Link>
           <p>{shortenedDescription}...</p>
           <div className="post_footer">
-            <PostAuthor authorId={authorId} />
+            <PostAuthor authorId={authorId} createdAt={createdAt} />
             <Link to={`posts/categories/${category}`} className="blog-category">
               {category}
             </Link>

@@ -1,7 +1,13 @@
-.navbar{
-    width: 100%;
-    background-color: #fff;
-  }
+.navbar {
+  width: 100%;
+  background-color: #fff;
+}
+.background {
+  background-image: url("../images/bg-7.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
 .authors {
   display: flex;
   flex-direction: column;

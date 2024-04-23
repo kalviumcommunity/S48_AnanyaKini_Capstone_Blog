@@ -11,30 +11,32 @@ const CategoryPosts = () => {
   return (
     <>
       <div className="navbar">
-      <Header />
+        <Header />
       </div>
-      <section className="category-posts">
-        {post.length > 0 ? (
-          <div className="category_posts-container">
-            {" "}
-            {post.map(
-              ({ id, thumbnail, category, title, description, authorId }) => (
-                <PostItem
-                  key={id}
-                  postID={id}
-                  thumbnail={thumbnail}
-                  category={category}
-                  title={title}
-                  description={description}
-                  authorID={authorId}
-                />
-              )
-            )}
-          </div>
-        ) : (
-          <h2 className="center">No posts found</h2>
-        )}
-      </section>
+      <div className="Category-bg">
+        <section className="category-posts">
+          {post.length > 0 ? (
+            <div className="category_posts-container">
+              {" "}
+              {post.map(
+                ({ id, thumbnail, category, title, description, authorId }) => (
+                  <PostItem
+                    key={id}
+                    postID={id}
+                    thumbnail={thumbnail}
+                    category={category}
+                    title={title}
+                    description={description}
+                    authorID={authorId}
+                  />
+                )
+              )}
+            </div>
+          ) : (
+            <h2 className="center">No posts found</h2>
+          )}
+        </section>
+      </div>
       <Footer />
     </>
   );

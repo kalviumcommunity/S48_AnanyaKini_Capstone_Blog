@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/userContext";
 
 const Logout = () => {
-  return (
-    <div>
-      
-      <div>
-      </div>
-      
-    </div>
-  );
+  const { setCurrentUser } = useContext(UserContext);
+  const navigate = useNavigate();
+  setCurrentUser(null);
+  navigate("/");
+
+  return <div></div>;
 };
 
 export default Logout;

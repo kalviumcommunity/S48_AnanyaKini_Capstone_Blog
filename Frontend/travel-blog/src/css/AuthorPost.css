@@ -5,7 +5,19 @@
   gap: 4rem;
   margin: 5rem 1rem 5rem 1rem;
 }
-.navbar{
+.navbar {
   width: 100%;
   background-color: #fff;
+}
+.authorPost-bg {
+  background-image: url("../images/bg-6.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+}
+.Category-bg {
+  background-image: url("../images/bg-1.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  display: flex;
 }

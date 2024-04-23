@@ -71,7 +71,7 @@ const loginUser = async (req, res, next) => {
 };
 
 // ================================================================================USER PROFILE
-// POST: api/users/:id
+// GET: api/users/:id
 const getUser = async (req, res, next) => {
   try {
     const { id } = req.params;

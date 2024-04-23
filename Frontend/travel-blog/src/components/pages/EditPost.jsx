@@ -1,16 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "../../css/CreatePost.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Header from "../Header";
 import Footer from "../Footer";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/userContext";
 
 const EditPost = () => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [thumbnail, setThumbnail] = useState("");
+  const { currentUser } = useContext(UserContext);
+  const token = currentUser?.token;
+  const navigate = useNavigate();
 
+  //Redirect to login page if the user hasnt logged in
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    }
+  }, []);
   const handleDescriptionChange = (value) => {
     setDescription(value);
   };
