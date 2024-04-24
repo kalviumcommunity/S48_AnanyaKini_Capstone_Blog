@@ -1,12 +1,29 @@
-import React, { useState } from "react";
-import { blogs_posts } from "../../Data";
+import React, { useState,useEffect } from "react";
 import PostItem from "../PostItem";
 import "../../css/AuthorPost.css";
 import Header from "../Header";
 import Footer from "../Footer";
 import "../../css/AuthorPost.css";
+import { useParams } from "react-router-dom";
+import axios from 'axios'
+
+
 const CategoryPosts = () => {
-  const [post] = useState(blogs_posts);
+  const [posts, setPosts] = useState([]);
+  const {category} = useParams()
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/posts/categories/${category}`);
+        setPosts(response?.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchPosts();
+  }, [category]);
+
 
   return (
     <>
@@ -14,28 +31,28 @@ const CategoryPosts = () => {
         <Header />
       </div>
       <div className="Category-bg">
-        <section className="category-posts">
-          {post.length > 0 ? (
+      {posts.length > 0 ? (
+        <>
+          <section className="category-posts">
             <div className="category_posts-container">
-              {" "}
-              {post.map(
-                ({ id, thumbnail, category, title, description, authorId }) => (
-                  <PostItem
-                    key={id}
-                    postID={id}
-                    thumbnail={thumbnail}
-                    category={category}
-                    title={title}
-                    description={description}
-                    authorID={authorId}
-                  />
-                )
-              )}
+              {posts.map((item) => (
+                <PostItem
+                  key={item._id}
+                  postID={item._id}
+                  thumbnail={item.thumbnail}
+                  category={item.category}
+                  title={item.title}
+                  description={item.description}
+                  authorId={item.creator}
+                  createdAt={item.createdAt}
+                />
+              ))}
             </div>
-          ) : (
-            <h2 className="center">No posts found</h2>
-          )}
-        </section>
+          </section>
+        </>
+      ) : (
+        <h2 className="center">No posts found</h2>
+      )}
       </div>
       <Footer />
     </>

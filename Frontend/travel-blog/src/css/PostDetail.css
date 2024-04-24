@@ -1,4 +1,4 @@
-.navbar{
+.navbar {
   width: 100%;
   background-color: #fff;
 }
@@ -13,13 +13,12 @@
 .post-detail_header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-.post-detail_button {
+.post-detail_buttons {
   display: flex;
   align-items: center;
-  margin: 1em;
 }
 .btn-edit {
   background-color: #1874ff;
@@ -28,13 +27,7 @@
   border-radius: 1em;
   margin: 1em;
 }
-.btn-delete {
-  background-color: rgb(254, 73, 73);
-  padding: 0.4rem 1rem;
-  color: #fff;
-  border-radius: 1em;
-  margin: 1em;
-}
+
 .post-detail_thumbnail {
   margin: 1rem 0;
   height: fit-content;
