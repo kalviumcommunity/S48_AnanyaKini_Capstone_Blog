@@ -43,7 +43,7 @@ const EditPost = () => {
       </div>
       <section className="create-post">
         <div className="create-post-container">
-          <h2>Create Post</h2>
+          <h2>Edit Post</h2>
           <p className="error-message">This is an error message</p>
           <form className="form-create-post">
             <input
@@ -84,7 +84,7 @@ const EditPost = () => {
               accept="png,jpg,jpeg"
             />
             <button type="submit" className="submit">
-              Create
+              Update Post
             </button>
           </form>
         </div>
