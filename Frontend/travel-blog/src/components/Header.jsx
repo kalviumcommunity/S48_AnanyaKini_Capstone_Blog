@@ -18,7 +18,7 @@ const Header = () => {
           {currentUser?.id && (
             <ul className="nav_menu">
               <li>
-                <Link to="/profile/sdfsdf">Earnest Achiever</Link>
+                <Link to="/profile/sdfsdf">{currentUser?.name}</Link>
               </li>
               <li>
                 <Link to="/create">Create Post</Link>

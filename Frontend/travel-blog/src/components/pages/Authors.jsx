@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios"; // Import axios
+import axios from "axios"; 
 import Header from "../Header";
 import Footer from "../Footer";
 import "../../css/Authors.css";
