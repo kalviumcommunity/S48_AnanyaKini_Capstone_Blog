@@ -11,7 +11,6 @@ TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
 
 const PostAuthor = ({ authorId, createdAt }) => {
-  console.log(authorId);
   const [author, setAuthor] = useState({});
   useEffect(() => {
     const getAuthor = async () => {

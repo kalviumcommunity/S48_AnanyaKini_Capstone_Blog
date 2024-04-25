@@ -10,7 +10,6 @@
 }
 .create-post {
   display: flex;
-  height: 90vh;
   width: 100%;
   align-items: center;
   justify-content: center;

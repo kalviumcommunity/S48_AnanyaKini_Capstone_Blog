@@ -4,38 +4,84 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Header from "../Header";
 import Footer from "../Footer";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
+import axios from 'axios';
 
 const EditPost = () => {
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState('Uncategorized');
   const [description, setDescription] = useState("");
   const [thumbnail, setThumbnail] = useState("");
+  const [error,setError] = useState()
   const { currentUser } = useContext(UserContext);
   const token = currentUser?.token;
   const navigate = useNavigate();
+  const { id } = useParams();
 
-  //Redirect to login page if the user hasnt logged in
   useEffect(() => {
+    const getPosts = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/posts/${id}`);
+        setTitle(response.data.title);
+        setDescription(response.data.description);
+        setCategory(response.data.category);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     if (!token) {
       navigate("/login");
+    } else {
+      getPosts();
     }
-  }, []);
+
+  }, []); // Added dependencies
+
   const handleDescriptionChange = (value) => {
     setDescription(value);
   };
+
+
 
   const Post_categories = [
     "Asia",
     "Africa",
     "Europe",
-    "Antartica",
+    "Antarctica", 
     "North America",
     "South America",
     "Australia",
     "Uncategorized",
   ];
+  
+  const editPost = async(e) => {
+    e.preventDefault();
+    const postData = new FormData();
+    postData.append('title', title);
+    postData.append('category', category);
+    postData.append('description', description);
+    postData.append('thumbnail', thumbnail);
+  
+    try {
+      const response = await axios.patch(`http://localhost:5000/api/posts/${id}`, postData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`
+        }
+      });
+  
+      if (response.status === 200) {
+        navigate('/');
+      }
+  
+    } catch (err) {
+      setError(err.response.data.message);
+    }
+  }
+
+
   return (
     <div>
       <div className="navbar">
@@ -44,8 +90,8 @@ const EditPost = () => {
       <section className="create-post">
         <div className="create-post-container">
           <h2>Edit Post</h2>
-          <p className="error-message">This is an error message</p>
-          <form className="form-create-post">
+          {error && <p className="error-message">{error}</p>}
+          <form className="form-create-post"onSubmit={editPost} >
             <input
               type="text"
               placeholder="  Title"

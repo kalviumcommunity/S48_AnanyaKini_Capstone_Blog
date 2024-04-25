@@ -203,23 +203,28 @@ const deletePost = async (req, res, next) => {
     }
 
     const fileName = post.thumbnail;
-    // Delete thumbnail from uploads folder
-    fs.unlink(path.join(__dirname, "..", "/uploads", fileName), async (err) => {
-      if (err) {
-        return next(new httpError(err));
-      } else {
-        // Delete post from database
-        await Post.findByIdAndDelete(postID);
-
-        // Update user's post count
-        const currentUser = await User.findById(req.user.id);
-        if (!currentUser) {
-          return next(new httpError("User not found", 404));
+    const fileDeleted = await new Promise((resolve, reject) => {
+      fs.unlink(path.join(__dirname, "..", "/uploads", fileName), (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(true);
         }
-        currentUser.posts -= 1; 
-        await currentUser.save(); 
-      }
+      });
     });
+
+    if (!fileDeleted) {
+      return next(new httpError("Failed to delete thumbnail file", 500));
+    }
+
+    await Post.findByIdAndDelete(postID);
+
+    const currentUser = await User.findById(req.user.id);
+    if (!currentUser) {
+      return next(new httpError("User not found", 404));
+    }
+    currentUser.posts -= 1;
+    await currentUser.save();
 
     res.json(`Post ${postID} deleted successfully.`);
   } catch (error) {

@@ -6,17 +6,18 @@ import Header from "../Header";
 import Footer from "../Footer";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
+import axios from 'axios';
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
-  const [thumbnail, setThumbnail] = useState("");
+  const [thumbnail, setThumbnail] = useState(null);
+  const [error, setError] = useState("");
   const { currentUser } = useContext(UserContext);
   const token = currentUser?.token;
   const navigate = useNavigate();
 
-  //Redirect to login page if the user hasnt logged in
   useEffect(() => {
     if (!token) {
       navigate("/login");
@@ -31,12 +32,39 @@ const CreatePost = () => {
     "Asia",
     "Africa",
     "Europe",
-    "Antartica",
+    "Antarctica",
     "North America",
     "South America",
     "Australia",
     "Uncategorized",
   ];
+
+  const createPost = async (e) => {
+    e.preventDefault();
+    const postData = new FormData();
+    postData.append('title', title);
+    postData.append('category', category);
+    postData.append('description', description);
+    postData.append('thumbnail', thumbnail);
+  
+    try {
+      const response = await axios.post(`http://localhost:5000/api/posts`, postData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`
+        }
+      });
+  
+      if (response.status === 201) {
+        navigate('/');
+      }
+  
+    } catch (err) {
+      setError(err.response.data.message);
+    }
+  };
+  
+
   return (
     <div>
       <div className="navbar">
@@ -46,8 +74,8 @@ const CreatePost = () => {
         <section className="create-post">
           <div className="create-post-container">
             <h2>Create Post</h2>
-            <p className="error-message">This is an error message</p>
-            <form className="form-create-post">
+            {error && <p className="error-message">{error}</p>}
+            <form className="form-create-post" onSubmit={createPost}>
               <input
                 type="text"
                 placeholder="  Title"
@@ -83,7 +111,7 @@ const CreatePost = () => {
               <input
                 type="file"
                 onChange={(e) => setThumbnail(e.target.files[0])}
-                accept="png,jpg,jpeg"
+                accept="image/png, image/jpeg"
               />
               <button type="submit" className="submit">
                 Create

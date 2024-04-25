@@ -25,7 +25,8 @@
   width: 70%;
 }
 .edit-post-container h2 {
-  color: #080062;
+  color: red;
+  padding: 0.5em 0;
 }
 .form-edit-post input {
   color: #080062;
