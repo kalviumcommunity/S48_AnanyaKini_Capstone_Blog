@@ -3,29 +3,49 @@ import "../../css/UserProfile.css";
 import Header from "../Header";
 import Footer from "../Footer";
 import { Link } from "react-router-dom";
-import Avatar from "../../images/People/1 (1).jpg";
-import { FaEdit } from "react-icons/fa";
-import { FaCheck } from "react-icons/fa";
+import { FaEdit, FaCheck } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { UserContext } from "../../context/userContext";
 
 const UserProfile = () => {
-  const [avatar, setAvatar] = useState(Avatar);
+  const [avatar, setAvatar] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [confirmnewPassword, setConfirmNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [isAvatarTouched, setIsAvatarTouched] = useState(false);
   const { currentUser } = useContext(UserContext);
   const token = currentUser?.token;
   const navigate = useNavigate();
 
-  //Redirect to login page if the user hasnt logged in
   useEffect(() => {
     if (!token) {
       navigate("/login");
     }
   }, []);
+
+  const changeAvatarHandler = async () => {
+    setIsAvatarTouched(false);
+    try {
+      const formData = new FormData();
+      formData.append("avatar", avatar);
+      const response = await axios.post(
+        "http://localhost:5000/api/users/change-avatar",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      setAvatar(response.data.avatar);
+    } catch (error) {
+      console.log("Error changing avatar:", error);
+    }
+  };
 
   return (
     <div>
@@ -35,13 +55,13 @@ const UserProfile = () => {
       <div className="profile-bg">
         <section className="profile">
           <div className="profile_container">
-            <Link to={`/myposts/sdfsdf`} className="btn">
+            <Link to={`/myposts/${currentUser.id}`} className="btn">
               My Posts
             </Link>
             <div className="profile_details">
               <div className="avatar_wrapper">
                 <div className="profile_avatar">
-                  <img src={avatar} alt="" />
+                  <img src={`http://localhost:5000/uploads/${avatar}`} alt="" />
                 </div>
                 <form className="avatar_form">
                   <input
@@ -49,19 +69,26 @@ const UserProfile = () => {
                     name="avatar"
                     id="avatar"
                     onChange={(e) => setAvatar(e.target.files[0])}
-                    accept="png,jpg,jpeg"
+                    accept="image/png, image/jpeg"
                   />
-                  <label htmlFor="avatar">
+                  <label
+                    htmlFor="avatar"
+                    onClick={() => setIsAvatarTouched(true)}
+                  >
                     <FaEdit />
                   </label>
+                  {isAvatarTouched && (
+                    <button
+                      className="profile_avatar-btn"
+                      onClick={changeAvatarHandler}
+                    >
+                      <FaCheck />
+                    </button>
+                  )}
                 </form>
-                <button className="profile_avatar-btn">
-                  <FaCheck />
-                </button>
               </div>
-              <h1>Ernest Achiever</h1>
-              <form action="" className="profile_form">
-                <p className="error-message">This is an error message</p>
+              <h1>{currentUser.name}</h1>
+              <form className="profile_form">
                 <input
                   type="text"
                   placeholder="Full Name"
@@ -88,8 +115,8 @@ const UserProfile = () => {
                 />
                 <input
                   type="password"
-                  placeholder="Confirm new Password"
-                  value={confirmnewPassword}
+                  placeholder="Confirm New Password"
+                  value={confirmNewPassword}
                   onChange={(e) => setConfirmNewPassword(e.target.value)}
                 />
                 <button type="submit" className="btn-submit">
