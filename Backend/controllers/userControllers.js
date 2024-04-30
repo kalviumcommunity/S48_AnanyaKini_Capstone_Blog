@@ -96,56 +96,73 @@ const changeAvatar = async (req, res, next) => {
     const user = await User.findById(req.user.id);
     // Delete old avatar if it exists
     if (user.avatar) {
-      fs.unlink(path.join(__dirname, "..", "uploads", user.avatar), (err) => {
-        if (err) {
-          return next(new HttpError(err));
+      const avatarPath = path.join(__dirname, "..", "uploads", user.avatar);
+      fs.access(avatarPath, fs.constants.F_OK, async (err) => {
+        if (!err) {
+          fs.unlink(avatarPath, async (err) => {
+            if (err) {
+              return next(new HttpError(err));
+            }
+            // Proceed with uploading new avatar
+            uploadNewAvatar(req, res, next, user);
+          });
+        } else {
+          // Proceed with uploading new avatar
+          uploadNewAvatar(req, res, next, user);
         }
       });
+    } else {
+      // No old avatar, directly upload new avatar
+      uploadNewAvatar(req, res, next, user);
     }
-    const { avatar } = req.files;
-    // Check file size
-    const maxSizeInBytes = 1024 * 1024 * 5; // 5MB
-    if (avatar.size > maxSizeInBytes) {
-      return next(
-        new HttpError(
-          "File size exceeds the limit. Size should be less than 5 MB",
-          422
-        )
-      );
-    }
-
-    const fileName = `${uuid()}-${avatar.name}`;
-    const splittedFilename = fileName.split(".");
-    const newFileName = `${splittedFilename[0]}.${
-      splittedFilename[splittedFilename.length - 1]
-    }`;
-
-    avatar.mv(
-      path.join(__dirname, "..", "uploads", newFileName),
-      async (err) => {
-        if (err) {
-          return next(new HttpError(err));
-        }
-
-        try {
-          const updatedAvatar = await User.findByIdAndUpdate(
-            req.user.id,
-            { avatar: newFileName },
-            { new: true }
-          );
-          if (!updatedAvatar) {
-            return next(new HttpError("Avatar couldnt be changed.", 422));
-          }
-          res.status(200).json(updatedAvatar);
-        } catch (error) {
-          return next(new HttpError(error));
-        }
-      }
-    );
   } catch (error) {
     return next(new HttpError(error));
   }
 };
+
+const uploadNewAvatar = async (req, res, next, user) => {
+  const { avatar } = req.files;
+  // Check file size
+  const maxSizeInBytes = 1024 * 1024 * 5; // 5MB
+  if (avatar.size > maxSizeInBytes) {
+    return next(
+      new HttpError(
+        "File size exceeds the limit. Size should be less than 5 MB",
+        422
+      )
+    );
+  }
+
+  const fileName = `${uuid()}-${avatar.name}`;
+  const splittedFilename = fileName.split(".");
+  const newFileName = `${splittedFilename[0]}.${
+    splittedFilename[splittedFilename.length - 1]
+  }`;
+
+  avatar.mv(
+    path.join(__dirname, "..", "uploads", newFileName),
+    async (err) => {
+      if (err) {
+        return next(new HttpError(err));
+      }
+
+      try {
+        const updatedAvatar = await User.findByIdAndUpdate(
+          req.user.id,
+          { avatar: newFileName },
+          { new: true }
+        );
+        if (!updatedAvatar) {
+          return next(new HttpError("Avatar couldn't be changed.", 422));
+        }
+        res.status(200).json(updatedAvatar);
+      } catch (error) {
+        return next(new HttpError(error));
+      }
+    }
+  );
+};
+
 
 // ======================================================================USER DETAILS (From profile)
 // POST: api/users/edit-avatar

@@ -15,13 +15,28 @@ mongoose
 
 const app = express();
 app.use(express.json());
-app.use(cors({
-  origin: 'http://localhost:5173',
-  credentials: true
-}));
 app.use(express.urlencoded({ extended: true }));
 app.use(upload());
 app.use("/uploads", express.static(__dirname + "/uploads"));
+
+const allowedOrigins = ["http://localhost:5173"];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        var msg =
+          "The CORS policy for this site does not allow access from the specified Origin.";
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
+    credentials: true,
+  })
+);
+
+app.options("*", cors());
 
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);

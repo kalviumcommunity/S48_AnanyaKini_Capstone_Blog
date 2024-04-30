@@ -4,21 +4,44 @@ import { blogs_posts } from "../../Data";
 import "../../css/Dashboard.css";
 import Header from "../Header";
 import Footer from "../Footer";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
+import axios from "axios";
+import DeletePost from "./DeletePost";
 
 const Dashboard = () => {
   const [posts, setPosts] = useState(blogs_posts);
   const { currentUser } = useContext(UserContext);
   const token = currentUser?.token;
+  const { id } = useParams();
   const navigate = useNavigate();
 
-  //Redirect to login page if the user hasnt logged in
   useEffect(() => {
     if (!token) {
       navigate("/login");
     }
-  }, []);
+  }, [token, navigate]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/api/posts/users/${id}`,
+          {
+            withCredentials: true,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setPosts(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchPosts();
+  }, [id, token]);
 
   return (
     <>
@@ -29,23 +52,24 @@ const Dashboard = () => {
         {posts.length ? (
           <div className="dashboard_container">
             {posts.map((post) => (
-              <article key={post.id} className="dashboard_post">
+              <article key={post._id} className="dashboard_post">
                 <div className="dashboard-posts_info">
                   <div className="dashboard_posts-thumbnail">
-                    <img src={post.thumbnail} alt="" />
+                    <img
+                      src={`http://localhost:5000/uploads/${post.thumbnail}`}
+                      alt=""
+                    />
                   </div>
                   <h5>{post.title}</h5>
                 </div>
                 <div className="dashboard-posts_actions">
-                  <Link to={`/posts/${posts.id}`} className="btn-view">
+                  <Link to={`/posts/${post._id}`} className="btn-view">
                     View
                   </Link>
-                  <Link to={`/posts/${posts.id}/edit`} className="btn-edit">
+                  <Link to={`/posts/${post._id}/edit`} className="btn-edit">
                     Edit
                   </Link>
-                  <Link to={`/posts/${posts.id}/delete`} className="btn-delete">
-                    Delete
-                  </Link>
+                  <DeletePost postID={post._id} />
                 </div>
               </article>
             ))}
