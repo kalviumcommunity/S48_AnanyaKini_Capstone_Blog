@@ -11,7 +11,7 @@ const Authors = () => {
   useEffect(() => {
     const getAuthors = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/users");
+        const response = await axios.get("https://s48-ananyakini-capstone-blog.onrender.com/api/users");
         setAuthors(response.data);
       } catch (error) {
         console.log(error);
@@ -32,7 +32,7 @@ const Authors = () => {
               {authors.map(({ _id, avatar, name, posts }) => (
                 <Link key={_id} to={`/posts/users/${_id}`} className="author">
                   <div className="author_avatar">
-                    <img src={`http://localhost:5000/uploads/${avatar}`} alt={`Image of ${name}`} />
+                    <img src={`https://s48-ananyakini-capstone-blog.onrender.com/uploads/${avatar}`} alt={`Image of ${name}`} />
                   </div>
                   <div className="author_info">
                     <h3>{name}</h3>

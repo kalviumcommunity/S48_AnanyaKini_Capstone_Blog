@@ -48,7 +48,7 @@ const CreatePost = () => {
     postData.append('thumbnail', thumbnail);
   
     try {
-      const response = await axios.post(`http://localhost:5000/api/posts`, postData, {
+      const response = await axios.post(`https://s48-ananyakini-capstone-blog.onrender.com/api/posts`, postData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`

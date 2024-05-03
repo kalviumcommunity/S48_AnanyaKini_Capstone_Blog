@@ -31,7 +31,7 @@ const UserProfile = () => {
     const getUser = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/users/${currentUser.id}`,
+          `https://s48-ananyakini-capstone-blog.onrender.com/api/users/${currentUser.id}`,
           {
             withCredentials: true,
             headers: { Authorization: `Bearer ${token}` },
@@ -55,7 +55,7 @@ const UserProfile = () => {
       const formData = new FormData();
       formData.append("avatar", avatar);
       const response = await axios.post(
-        "http://localhost:5000/api/users/change-avatar",
+        "https://s48-ananyakini-capstone-blog.onrender.com/api/users/change-avatar",
         formData,
         {
           withCredentials: true,
@@ -82,7 +82,7 @@ const UserProfile = () => {
       userData.append("confirmNewPassword", confirmNewPassword);
 
       const response = await axios.patch(
-        `http://localhost:5000/api/users/edit-user`,
+        `https://s48-ananyakini-capstone-blog.onrender.com/api/users/edit-user`,
         userData,
         {
           withCredentials: true,
@@ -115,7 +115,7 @@ const UserProfile = () => {
             <div className="profile_details">
               <div className="avatar_wrapper">
                 <div className="profile_avatar">
-                  <img src={`http://localhost:5000/uploads/${avatar}`} alt="" />
+                  <img src={`https://s48-ananyakini-capstone-blog.onrender.com//uploads/${avatar}`} alt="" />
                 </div>
                 <form className="avatar_form">
                   <input

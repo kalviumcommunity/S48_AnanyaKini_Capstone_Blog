@@ -13,7 +13,7 @@ const AuthorPost = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/posts/users/${id}`);
+        const response = await axios.get(`https://s48-ananyakini-capstone-blog.onrender.com/api/posts/users/${id}`);
         setPosts(response?.data);
       } catch (error) {
         console.log(error);

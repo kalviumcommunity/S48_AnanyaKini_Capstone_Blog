@@ -15,7 +15,7 @@ const CategoryPosts = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/posts/categories/${category}`);
+        const response = await axios.get(`https://s48-ananyakini-capstone-blog.onrender.com/api/posts/categories/${category}`);
         setPosts(response?.data);
       } catch (error) {
         console.log(error);

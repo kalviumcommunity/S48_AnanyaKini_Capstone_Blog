@@ -18,7 +18,7 @@ const PostDetail = () => {
     const getPosts = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/posts/${id}`
+          `https://s48-ananyakini-capstone-blog.onrender.com/api/posts/${id}`
         );
         setPost(response.data);
       } catch (error) {
@@ -52,7 +52,7 @@ const PostDetail = () => {
             <h1>{post.title}</h1>
             <div className="post-detail_thumbnail">
               <img
-                src={`http://localhost:5000/uploads/${post.thumbnail}`}
+                src={`https://s48-ananyakini-capstone-blog.onrender.com/uploads/${post.thumbnail}`}
                 alt=""
               />
             </div>
