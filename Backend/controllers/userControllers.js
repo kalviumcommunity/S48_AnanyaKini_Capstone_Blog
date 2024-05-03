@@ -168,7 +168,7 @@ const uploadNewAvatar = async (req, res, next, user) => {
 // POST: api/users/edit-avatar
 const editUser = async (req, res, next) => {
   try {
-    const { name, email, currentPassword, newPassword, newConfirmPassword } =
+    const { name, email, currentPassword, newPassword, confirmNewPassword } =
       req.body;
     if (!name || !email || !currentPassword || !newPassword) {
       return next(new HttpError("All fields are required.", 422));
@@ -196,7 +196,7 @@ const editUser = async (req, res, next) => {
       return next(new HttpError("Invalid password", 422));
     }
     //compare new password
-    if (newPassword != newConfirmPassword) {
+    if (newPassword != confirmNewPassword) {
       return next(new HttpError("New passwords do not match", 422));
     }
     const salt = await bcrypt.genSalt(10);
