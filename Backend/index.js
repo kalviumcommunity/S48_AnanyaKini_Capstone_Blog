@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(upload());
 app.use("/uploads", express.static(__dirname + "/uploads"));
 
-const allowedOrigins = ["http://localhost:5173"];
+const allowedOrigins = ["https://globetrottersblog.netlify.app/"];
 
 app.use(
   cors({
