@@ -16,7 +16,7 @@ const PostAuthor = ({ authorId, createdAt }) => {
     const getAuthor = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/users/${authorId}`
+          `https://s48-ananyakini-capstone-blog.onrender.com/api/users/${authorId}`
         );
         setAuthor(response?.data);
       } catch (error) {
@@ -29,7 +29,7 @@ const PostAuthor = ({ authorId, createdAt }) => {
   return (
     <Link to={`/posts/users/${authorId}`} className="post_author">
       <div className="post_author-avatar">
-        <img src={`http://localhost:5000/uploads/${author.avatar}`} alt="" />{" "}
+        <img src={`https://s48-ananyakini-capstone-blog.onrender.com/uploads/${author.avatar}`} alt="" />{" "}
       </div>
       <div className="post_author-details">
         <h5>By: {author?.name} </h5>

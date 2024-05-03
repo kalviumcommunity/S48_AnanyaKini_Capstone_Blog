@@ -22,7 +22,7 @@ const EditPost = () => {
   useEffect(() => {
     const getPosts = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/posts/${id}`);
+        const response = await axios.get(`https://s48-ananyakini-capstone-blog.onrender.com/api/posts/${id}`);
         setTitle(response.data.title);
         setDescription(response.data.description);
         setCategory(response.data.category);
@@ -65,7 +65,7 @@ const EditPost = () => {
     postData.append('thumbnail', thumbnail);
   
     try {
-      const response = await axios.patch(`http://localhost:5000/api/posts/${id}`, postData, {
+      const response = await axios.patch(`https://s48-ananyakini-capstone-blog.onrender.com/api/posts/${id}`, postData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`

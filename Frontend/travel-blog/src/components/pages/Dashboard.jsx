@@ -26,7 +26,7 @@ const Dashboard = () => {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/posts/users/${id}`,
+          `https://s48-ananyakini-capstone-blog.onrender.com/api/posts/users/${id}`,
           {
             withCredentials: true,
             headers: {
@@ -56,7 +56,7 @@ const Dashboard = () => {
                 <div className="dashboard-posts_info">
                   <div className="dashboard_posts-thumbnail">
                     <img
-                      src={`http://localhost:5000/uploads/${post.thumbnail}`}
+                      src={`https://s48-ananyakini-capstone-blog.onrender.com/uploads/${post.thumbnail}`}
                       alt=""
                     />
                   </div>

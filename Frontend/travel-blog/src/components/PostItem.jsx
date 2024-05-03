@@ -22,7 +22,7 @@ const PostItem = ({
     <div>
       <article className="article">
         <div className="post_thumbnail">
-          <img src={`http://localhost:5000/uploads/${thumbnail}`} alt={title} />
+          <img src={`https://s48-ananyakini-capstone-blog.onrender.com/uploads/${thumbnail}`} alt={title} />
         </div>
         <div className="post_content">
           <Link to={`/posts/${postID}`}>

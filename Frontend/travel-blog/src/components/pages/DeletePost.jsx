@@ -19,7 +19,7 @@ const DeletePost = ({ postID: id }) => {
   const removePost = async () => {
     try {
       const response = await axios.delete(
-        `http://localhost:5000/api/posts/${id}`,
+        `https://s48-ananyakini-capstone-blog.onrender.com/api/posts/${id}`,
         {
           withCredentials: true,
           headers: { Authorization: `Bearer ${token}` },
